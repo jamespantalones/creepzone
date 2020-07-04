@@ -1,11 +1,14 @@
-/**
- * This file is just a silly example to show everything working in the browser.
- * When you're ready to start on your site, clear the file. Happy hacking!
- **/
+import { ShaderStore } from './shaderControl/ShaderStore';
+import Couch from './media/dog.jpeg';
 
-import confetti from 'canvas-confetti';
+function start() {
+  let store;
+  const tex = new Image();
+  tex.onload = () => {
+    store = new ShaderStore(document.getElementById('main'), tex, 'base');
+  };
+  tex.onerror = (err) => console.warn(err);
+  tex.src = Couch;
+}
 
-confetti.create(document.getElementById('canvas'), {
-  resize: true,
-  useWorker: true,
-})({ particleCount: 200, spread: 200 });
+start();
